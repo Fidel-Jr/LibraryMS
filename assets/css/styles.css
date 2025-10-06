@@ -165,7 +165,6 @@ body {
     transition: transform 0.3s ease;
     margin-bottom: 20px;
     border: none;
-    height: 80%;
 }
 
 .dashboard-card:hover {
@@ -174,6 +173,7 @@ body {
 .card{
     border: none !important;
 }
+
 .card-header{
     background-color: white !important;
     border: none !important;

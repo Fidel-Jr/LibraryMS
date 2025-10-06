@@ -15,6 +15,10 @@
             background-color: white !important;
             border: none !important;
         }
+        .dashboard-card{
+            height: fit-content !important;
+            margin-bottom: 0 !important;
+        }
     </style>
 </head>
 <body>
@@ -105,83 +109,55 @@
                         </div>
                     </div>
                 </div>
-                 <div class="col-xl-3 col-md-6">
-                    <div class="card dashboard-card shadow-sm bg-light text-dark">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <h5 class="card-title">Total Members</h5>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="stat-value me-2">1,230</div> 
-                                        <span class="badge bg-success-subtle text-success border rounded-pill px-2 py-1">+40</span>
-                                    </div>
-                                </div>
-                                <div class="card-icon">
-                                    <i class="fas fa-users"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                 <div class="col-xl-3 col-md-6">
-                    <div class="card dashboard-card shadow-sm bg-light text-dark">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <h5 class="card-title">Total Members</h5>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="stat-value me-2">1,230</div> 
-                                        <span class="badge bg-success-subtle text-success border rounded-pill px-2 py-1">+40</span>
-                                    </div>
-                                </div>
-                                <div class="card-icon">
-                                    <i class="fas fa-users"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                 <div class="col-xl-3 col-md-6">
-                    <div class="card dashboard-card shadow-sm bg-light text-dark">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <h5 class="card-title">Total Members</h5>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="stat-value me-2">1,230</div> 
-                                        <span class="badge bg-success-subtle text-success border rounded-pill px-2 py-1">+40</span>
-                                    </div>
-                                </div>
-                                <div class="card-icon">
-                                    <i class="fas fa-users"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                 <div class="col-xl-3 col-md-6">
-                    <div class="card dashboard-card shadow-sm bg-light text-dark">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <h5 class="card-title">Total Members</h5>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="stat-value me-2">1,230</div> 
-                                        <span class="badge bg-success-subtle text-success border rounded-pill px-2 py-1">+40</span>
-                                    </div>
-                                </div>
-                                <div class="card-icon">
-                                    <i class="fas fa-users"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>  
+                
             </div>
+
+            <!-- Chart.js and Overdue -->
+            <div class="row mt-4">
+                <div class="col-xl-7 col-lg-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body" style="height:380px;">
+                            <h5 class="card-title">Check-out statistics</h5>
+                            <canvas id="checkoutChart" height="300" style="max-height: 300px;"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-5 col-lg-12">
+                    <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Overdue’s History</h5>
+                        <div class="table-responsive">
+                        <table class="table table-borderless mb-0">
+                            <thead class="border-bottom">
+                            <tr>
+                                <th>Member ID</th>
+                                <th>Title</th>
+                                <th>ISBN</th>
+                                <th>Due Date</th>
+                                <th>Fine</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr><td>#48964</td><td>Magnolia Palace</td><td>3234</td><td>5</td><td>$10</td></tr>
+                            <tr><td>#48964</td><td>Don Quixote</td><td>3234</td><td>5</td><td>$10</td></tr>
+                            <tr><td>#48964</td><td>Alice's Adventures...</td><td>3234</td><td>5</td><td>$10</td></tr>
+                            <tr><td>#48964</td><td>Pride and Prejudice</td><td>3234</td><td>5</td><td>$10</td></tr>
+                            <tr><td>#48964</td><td>Treasure Island</td><td>3234</td><td>5</td><td>$10</td></tr>
+                            <tr><td>#48964</td><td>Treasure Island</td><td>3234</td><td>5</td><td>$10</td></tr>
+                            <tr><td>#48964</td><td>Treasure Island</td><td>3234</td><td>5</td><td>$10</td></tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
             
             <!-- Charts and Activity -->
-            <div class="row mt-2 align-items-stretch">
-                <div class="col-lg-9 d-flex flex-column">
+            <div class="row mt-4 align-items-stretch">
+                <div class="col-xl-9 col-lg-12 d-flex flex-column">
                     <div class="card shadow-sm h-100">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="card-title mb-0">Recent Issued</h5>
@@ -254,7 +230,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 d-flex flex-column">
+                <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 d-flex flex-column">
                     <div class="card shadow-sm h-100">
                         <div class="card-header bg-white border-0 d-flex align-items-center">
                             <!-- Tabs -->
@@ -301,13 +277,74 @@
                 </div>
             </div>
         </div>
+        
     </div>
 
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- Custom JavaScript -->
-     <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Chart.JS Script -->
+    <script>
+        const ctx = document.getElementById('checkoutChart').getContext('2d');
+
+        const checkoutChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [
+                    {
+                        label: 'Borrowed',
+                        data: [2800, 4500, 3200, 3400, 2000, 3300, 3100],
+                        borderColor: '#22c55e',
+                        backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                    },
+                    {
+                        label: 'Returned',
+                        data: [1500, 2600, 4300, 4100, 3700, 2900, 2400],
+                        borderColor: '#ef4444',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                aspectRatio: 2, // Optional: controls width/height ratio
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: value => value + 'K',
+                        },
+                        grid: { color: '#f1f1f1' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { usePointStyle: true, boxWidth: 8 }
+                    },
+                    tooltip: { mode: 'index', intersect: false }
+                },
+                interaction: {
+                    mode: 'nearest',
+                    axis: 'x',
+                    intersect: false
+                }
+            }
+        });
+    </script>
     
 </body>
 </html>
