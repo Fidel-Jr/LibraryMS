@@ -1,11 +1,21 @@
 <?php
 
-    // require_once '../config/database.php';
+    require_once '../config/database.php';
     require_once '../models/Book.php';
-    // $book = new Book($pdo);
+    $book = new Book($pdo);
 
     // Further code to handle adding a book would go here
-
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = [
+        "title" => $_POST['title'],
+        "author" => $_POST['author'],
+        "isbn" => $_POST['isbn'],
+        "edition" => $_POST['edition'],
+        "year_published" => $_POST['year_published']
+    ];
+    $newBookAdded = $book->addBook($data);
+    
+}
 
 ?>
 
@@ -33,7 +43,23 @@
         <?php include '../includes/navbar.php'; ?>
         <!-- Page Content -->
         <div class="container-fluid mt-4 bg-white p-4 rounded shadow-sm">
-            <h2>Add New Book</h2>
+            <h2 class="mb-3">Add New Book</h2>
+            <?php
+                if (isset($newBookAdded)) {
+                    if (!$newBookAdded) {
+                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Failed!</strong> to add the book    .
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                              </div>';
+                    }
+                     else {
+                        echo '<div class="alert alert-Success alert-dismissible fade show" role="alert">
+                                <strong>Success!</strong> New book added.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                              </div>';
+                    }
+                }
+            ?>
             <form action="add-book.php" method="POST">
                 <div class="mb-3">
                     <label for="title" class="form-label">Book Title</label>
@@ -48,9 +74,12 @@
                     <input type="text" class="form-control" id="isbn" name="isbn" required>
                 </div>
                 <div class="mb-3">
-                    <label for="published_date" class="form-label
-">Published Date</label>
-                    <input type="date" class="form-control" id="published_date" name="published_date" required>
+                    <label for="edition" class="form-label">Edition</label>
+                    <input type="text" class="form-control" id="edition" name="edition" required>
+                </div>
+                <div class="mb-3">
+                    <label for="year_published">Enter Year:</label>
+                    <input type="number" class="form-control" id="year_published" name="year_published" min="1900" max="2100" placeholder="YYYY" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Add Book</button>
             </form>

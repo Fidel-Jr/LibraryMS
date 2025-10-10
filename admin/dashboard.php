@@ -19,6 +19,19 @@
             height: fit-content !important;
             margin-bottom: 0 !important;
         }
+        .bg-success-subtle{
+            background-color: var(--bg-subtle-primary-color) !important;
+            color: var(--primary-color) !important;
+            border: none !important;
+        }
+        .bg-danger-subtle{
+            background-color: var(--bg-subtle-secondary-color) !important;
+            color: #db3545 !important;
+            border: none !important;
+        }
+        .table td{
+            color: var(--secondary-text) !important;
+        }
     </style>
 </head>
 <body>
@@ -37,7 +50,7 @@
             
             <!-- Stats Cards -->
             <div class="row mt-4">
-                <div class="col-xl-3 col-md-6">
+                <div class="col-xl-3 col-md-6 mb-4">
                     <div class="card dashboard-card shadow-sm bg-light text-dark">
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
@@ -55,7 +68,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-6">
+                <div class="col-xl-3 col-md-6 mb-4">
                     <div class="card dashboard-card shadow-sm bg-light text-dark">
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
@@ -73,7 +86,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-6">
+                <div class="col-xl-3 col-md-6 mb-4">
                     <div class="card dashboard-card shadow-sm bg-light text-dark">
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
@@ -91,7 +104,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-6">
+                <div class="col-xl-3 col-md-6 mb-4">
                     <div class="card dashboard-card shadow-sm bg-light text-dark">
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
@@ -113,17 +126,17 @@
             </div>
 
             <!-- Chart.js and Overdue -->
-            <div class="row mt-4">
-                <div class="col-xl-7 col-lg-12">
+            <div class="row">
+                <div class="col-xl-7 col-lg-12 mb-4">
                     <div class="card shadow-sm">
                         <div class="card-body" style="height:380px;">
-                            <h5 class="card-title">Check-out statistics</h5>
+                            <h5 class="card-title">Issued Boo statistics</h5>
                             <canvas id="checkoutChart" height="300" style="max-height: 300px;"></canvas>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-xl-5 col-lg-12">
+                <div class="col-xl-5 col-lg-12 mb-4">
                     <div class="card shadow-sm h-100">
                     <div class="card-body">
                         <h5 class="card-title">Overdue’s History</h5>
@@ -156,8 +169,8 @@
 
             
             <!-- Charts and Activity -->
-            <div class="row mt-4 align-items-stretch">
-                <div class="col-xl-9 col-lg-12 d-flex flex-column">
+            <div class="row align-items-stretch">
+                <div class="col-xl-9 col-lg-12 d-flex flex-column mb-4">
                     <div class="card shadow-sm h-100">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="card-title mb-0">Recent Issued</h5>
@@ -182,7 +195,7 @@
                                         <td>Mr. Smith</td>
                                         <td>John Doe</td>
                                         <td>2024-10-01</td>
-                                        <td><span class="badge bg-success">Completed</span></td>
+                                        <td><span class="badge" style="background-color: var(--primary-color);">Completed</span></td>
                                     </tr>
                                     <tr>
                                         <td>#341143</td>
@@ -190,7 +203,7 @@
                                         <td>Adams Chester</td>
                                         <td>Jane Smith</td>
                                         <td>2024-10-02</td>
-                                        <td><span class="badge bg-success">Completed</span></td>    
+                                        <td><span class="badge" style="background-color: var(--primary-color);">Completed</span></td>    
                                     </tr>
                                     <tr>
                                         <td>#341143</td>
@@ -198,7 +211,7 @@
                                         <td>Adams Chester</td>
                                         <td>Jane Smith</td>
                                         <td>2024-10-02</td>
-                                        <td><span class="badge bg-success">Completed</span></td>    
+                                        <td><span class="badge" style="background-color: var(--primary-color);">Completed</span></td>    
                                     </tr>
                                     <tr>
                                         <td>#341143</td>
@@ -206,7 +219,7 @@
                                         <td>Adams Chester</td>
                                         <td>Jane Smith</td>
                                         <td>2024-10-02</td>
-                                        <td><span class="badge bg-success">Completed</span></td>    
+                                        <td><span class="badge" style="background-color: var(--primary-color);">Completed</span></td>    
                                     </tr>
                                     <tr>
                                         <td>#341143</td>
@@ -214,7 +227,7 @@
                                         <td>Adams Chester</td>
                                         <td>Jane Smith</td>
                                         <td>2024-10-02</td>
-                                        <td><span class="badge bg-success">Completed</span></td>    
+                                        <td><span class="badge" style="background-color: var(--primary-color);">Completed</span></td>    
                                     </tr>
                                     <tr>
                                         <td>#341143</td>
@@ -222,7 +235,7 @@
                                         <td>Adams Chester</td>
                                         <td>Jane Smith</td>
                                         <td>2024-10-02</td>
-                                        <td><span class="badge bg-success">Completed</span></td>    
+                                        <td><span class="badge" style="background-color: var(--primary-color);">Completed</span></td>    
                                     </tr>
                                 </tbody>
 
@@ -230,13 +243,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 d-flex flex-column">
+                <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 d-flex flex-column mb-4">
                     <div class="card shadow-sm h-100">
                         <div class="card-header bg-white border-0 d-flex align-items-center">
                             <!-- Tabs -->
-                            <button class="btn btn-sm rounded-pill me-2 px-3 fw-semibold" style="background-color: var(--primary-color); color: var(--primary-light);">
+                            <div class="rounded-pill me-2 px-2 p-1 fw-semibold" style="background-color: var(--primary-color); color: var(--primary-light);">
                                 Top Books
-                            </button>
+                            </div>
                             <button class="btn btn-outline-secondary btn-sm rounded-pill px-3">
                                 New arrivals
                             </button>
@@ -277,7 +290,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 
     <!-- Bootstrap JS and Popper.js -->
@@ -295,20 +308,20 @@
             type: 'line',
             data: {
                 labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                datasets: [
+                datasets: [ 
                     {
                         label: 'Borrowed',
                         data: [2800, 4500, 3200, 3400, 2000, 3300, 3100],
-                        borderColor: '#22c55e',
-                        backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                        borderColor: '#1a73e8', // You can change the background color here
+                        backgroundColor: 'rgba(24, 74, 192, 0.1)', // You can change the fill color here
                         tension: 0.4,
                         fill: true,
                     },
                     {
                         label: 'Returned',
                         data: [1500, 2600, 4300, 4100, 3700, 2900, 2400],
-                        borderColor: '#ef4444',
-                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        borderColor: '#ef4444', // You can change the background color here
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)', // You can change the fill color here
                         tension: 0.4,
                         fill: true,
                     }

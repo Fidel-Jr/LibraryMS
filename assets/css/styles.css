@@ -28,6 +28,8 @@
   --error-color: #f44336;
   --error-light: #f8d7da;
   --warning-color: #ffc107;
+  --bg-subtle-primary-color : #cfe2ff;
+  --bg-subtle-secondary-color: #f8d7da;
 }
 
 body {
@@ -310,4 +312,10 @@ body {
 .quick-action-btn i {
     margin-right: 10px;
     font-size: 1.1rem;
+}
+
+/* TABLES */
+
+.card td{
+    color: var(--secondary-text) !important;
 }
