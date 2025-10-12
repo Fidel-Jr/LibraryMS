@@ -1,20 +1,30 @@
 <?php
 
-    require_once '../config/database.php';
-    require_once '../models/Book.php';
-    $book = new Book($pdo);
+require_once '../config/database.php';
+require_once '../models/Book.php';
+$book = new Book($pdo);
 
-    // Further code to handle adding a book would go here
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+$errors = [];
+$old = [];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = [
-        "title" => $_POST['title'],
-        "author" => $_POST['author'],
-        "isbn" => $_POST['isbn'],
-        "edition" => $_POST['edition'],
-        "year_published" => $_POST['year_published']
+        "title" => $_POST['title'] ?? '',
+        "author" => $_POST['author'] ?? '',
+        "isbn" => $_POST['isbn'] ?? '',
+        "year_published" => $_POST['year_published'] ?? '',
+        "shelf_location" => $_POST['shelf_location'] ?? '',
+        "category" => $_POST['category'] ?? '',
+        "condition" => $_POST['condition'] ?? '',
+        "status" => $_POST['status'] ?? ''
     ];
+
+    $old = $data; // store old values for redisplay
     $newBookAdded = $book->addBook($data);
-    
+
+    if (!$newBookAdded['success']) {
+        $errors = $newBookAdded['errors'];
+    }
 }
 
 ?>
@@ -24,70 +34,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- Bootstrap CSS & JS -->
+    <title>Add New Book</title>
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <!-- Font Awesome for icons -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/styles.css">
+
+    <style>
+        .is-invalid {
+            border-color: #dc3545 !important;
+        }
+        .invalid-feedback {
+            display: block;
+            color: #dc3545;
+        }
+    </style>
 </head>
 <body>
 
-
-    <!-- Sidebar -->
     <?php include '../includes/sidebar.php'; ?>
-    <!-- Main Content -->
+
     <div id="content">
-        <!-- Navbar -->
         <?php include '../includes/navbar.php'; ?>
-        <!-- Page Content -->
+
         <div class="container-fluid mt-4 bg-white p-4 rounded shadow-sm">
             <h2 class="mb-3">Add New Book</h2>
+
             <?php
-                if (isset($newBookAdded)) {
-                    if (!$newBookAdded) {
-                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>Failed!</strong> to add the book    .
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                              </div>';
-                    }
-                     else {
-                        echo '<div class="alert alert-Success alert-dismissible fade show" role="alert">
-                                <strong>Success!</strong> New book added.
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                              </div>';
-                    }
+            if (isset($newBookAdded)) {
+                if ($newBookAdded['success']) {
+                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Success!</strong> New book added successfully.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>';
+                } elseif (!empty($errors)) {
+                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Failed!</strong> Please insert all the required data below.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>';
                 }
+            }
             ?>
+
             <form action="add-book.php" method="POST">
+                <!-- Title -->
                 <div class="mb-3">
                     <label for="title" class="form-label">Book Title</label>
-                    <input type="text" class="form-control" id="title" name="title" required>
+                    <input type="text" class="form-control <?= in_array('Title is required.', $errors) ? 'is-invalid' : '' ?>"
+                        id="title" name="title" value="<?= htmlspecialchars($old['title'] ?? '') ?>">
+                    <?php if (in_array('Title is required.', $errors)): ?>
+                        <div class="invalid-feedback">Title is required.</div>
+                    <?php endif; ?>
                 </div>
+
+                <!-- Author -->
                 <div class="mb-3">
                     <label for="author" class="form-label">Author</label>
-                    <input type="text" class="form-control" id="author" name="author" required>
+                    <input type="text" class="form-control <?= in_array('Author is required.', $errors) ? 'is-invalid' : '' ?>"
+                        id="author" name="author" value="<?= htmlspecialchars($old['author'] ?? '') ?>">
+                    <?php if (in_array('Author is required.', $errors)): ?>
+                        <div class="invalid-feedback">Author is required.</div>
+                    <?php endif; ?>
                 </div>
+
+                <!-- ISBN -->
                 <div class="mb-3">
                     <label for="isbn" class="form-label">ISBN</label>
-                    <input type="text" class="form-control" id="isbn" name="isbn" required>
+                    <input type="text" class="form-control <?= in_array('Isbn is required.', $errors) ? 'is-invalid' : '' ?>"
+                        id="isbn" name="isbn" value="<?= htmlspecialchars($old['isbn'] ?? '') ?>">
+                    <?php if (in_array('Isbn is required.', $errors)): ?>
+                        <div class="invalid-feedback">ISBN is required.</div>
+                    <?php endif; ?>
                 </div>
+
+                <!-- Year -->
                 <div class="mb-3">
-                    <label for="edition" class="form-label">Edition</label>
-                    <input type="text" class="form-control" id="edition" name="edition" required>
+                    <label for="year_published" class="form-label">Year Published</label>
+                    <input type="number" class="form-control <?= in_array('Year published is required.', $errors) ? 'is-invalid' : '' ?>"
+                        id="year_published" name="year_published" min="1900" max="2100" placeholder="YYYY"
+                        value="<?= htmlspecialchars($old['year_published'] ?? '') ?>">
+                    <?php if (in_array('Year published is required.', $errors)): ?>
+                        <div class="invalid-feedback">Year published is required.</div>
+                    <?php endif; ?>
                 </div>
+
+                <!-- Shelf -->
                 <div class="mb-3">
-                    <label for="year_published">Enter Year:</label>
-                    <input type="number" class="form-control" id="year_published" name="year_published" min="1900" max="2100" placeholder="YYYY" required>
+                    <label for="shelf_location" class="form-label">Shelf Location</label>
+                    <input type="text" class="form-control <?= in_array('Shelf location is required.', $errors) ? 'is-invalid' : '' ?>"
+                        id="shelf_location" name="shelf_location" value="<?= htmlspecialchars($old['shelf_location'] ?? '') ?>">
+                    <?php if (in_array('Shelf location is required.', $errors)): ?>
+                        <div class="invalid-feedback">Shelf location is required.</div>
+                    <?php endif; ?>
                 </div>
-                <button type="submit" class="btn btn-primary">Add Book</button>
+
+                <!-- Category -->
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <input type="text" class="form-control <?= in_array('Category is required.', $errors) ? 'is-invalid' : '' ?>" id="category" name="category"
+                        value="<?= htmlspecialchars($old['category'] ?? '') ?>">
+                    <?php if (in_array('Author is required.', $errors)): ?>
+                        <div class="invalid-feedback">Category is required.</div>
+                    <?php endif; ?>
+                </div>
+
+                <!-- Condition -->
+                <div class="mb-3">
+                    <label class="form-label">Condition</label>
+                    <select class="form-select <?= in_array('Condition is required.', $errors) ? 'is-invalid' : '' ?>"
+                        id="condition" name="condition">
+                        <option value="">Select Condition</option>
+                        <option value="New" <?= (isset($old['condition']) && $old['condition'] === 'New') ? 'selected' : '' ?>>New</option>
+                        <option value="Good" <?= (isset($old['condition']) && $old['condition'] === 'Good') ? 'selected' : '' ?>>Good</option>
+                        <option value="Damaged" <?= (isset($old['condition']) && $old['condition'] === 'Damaged') ? 'selected' : '' ?>>Damaged</option>
+                    </select>
+                    <?php if (in_array('Condition is required.', $errors)): ?>
+                        <div class="invalid-feedback">Condition is required.</div>
+                    <?php endif; ?>
+                </div>
+
+                <!-- Status -->
+                <div class="mb-3">
+                    <label class="form-label">Status</label>
+                    <select class="form-select <?= in_array('Status is required.', $errors) ? 'is-invalid' : '' ?>"
+                        id="status" name="status">
+                        <option value="">Select Status</option>
+                        <option value="Available" <?= (isset($old['status']) && $old['status'] === 'Available') ? 'selected' : '' ?>>Available</option>
+                        <option value="Borrowed" <?= (isset($old['status']) && $old['status'] === 'Borrowed') ? 'selected' : '' ?>>Borrowed</option>
+                        <option value="Reserved" <?= (isset($old['status']) && $old['status'] === 'Reserved') ? 'selected' : '' ?>>Reserved</option>
+                        <option value="Lost" <?= (isset($old['status']) && $old['status'] === 'Lost') ? 'selected' : '' ?>>Lost</option>
+                    </select>
+                    <?php if (in_array('Status is required.', $errors)): ?>
+                        <div class="invalid-feedback">Status is required.</div>
+                    <?php endif; ?>
+                </div>
+
+                <button type="submit" class="btn" style="background-color: var(--primary-color); color: var(--primary-light);">Add Book</button>
             </form>
         </div>
     </div>
 
-
     <script src="../assets/js/main.js"></script>
-    
 </body>
 </html>

@@ -247,12 +247,12 @@
                     <div class="card shadow-sm h-100">
                         <div class="card-header bg-white border-0 d-flex align-items-center">
                             <!-- Tabs -->
-                            <div class="rounded-pill me-2 px-2 p-1 fw-semibold" style="background-color: var(--primary-color); color: var(--primary-light);">
+                            <div class="rounded-pill me-2 px-3 p-1 fw-semibold" style="background-color: var(--primary-color); color: var(--primary-light);">
                                 Top Books
                             </div>
-                            <button class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                            <!-- <button class="btn btn-outline-secondary btn-sm rounded-pill px-3">
                                 New arrivals
-                            </button>
+                            </button> -->
                         </div>
 
                         <div class="card-body">

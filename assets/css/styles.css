@@ -316,6 +316,3 @@ body {
 
 /* TABLES */
 
-.card td{
-    color: var(--secondary-text) !important;
-}
