@@ -130,7 +130,7 @@
                 <div class="col-xl-7 col-lg-12 mb-4">
                     <div class="card shadow-sm">
                         <div class="card-body" style="height:380px;">
-                            <h5 class="card-title">Issued Boo statistics</h5>
+                            <h5 class="card-title">Issued Book statistics</h5>
                             <canvas id="checkoutChart" height="300" style="max-height: 300px;"></canvas>
                         </div>
                     </div>

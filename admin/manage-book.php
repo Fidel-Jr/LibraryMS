@@ -38,7 +38,7 @@
         $deleted = $book->deleteBook($_GET["deleted_id"]);
 
         if ($deleted) {
-            header("Location: manage-book.php");
+            header("Location: manage-book.php?deleted=1");
             exit;
         } 
     }
@@ -69,11 +69,25 @@
         <?php include '../includes/navbar.php'; ?>
         <!-- Page Content -->
         <div class="container-fluid mt-4 bg-white p-4 rounded shadow-sm">
-            <h2 class="mb-3">Book Management</h2>
+            <div class="d-flex justify-content-between">
+              <div>
+                <h2 class="mb-3">Book Management</h2>
+              </div>
+              <div>
+                <a href="add-book.php" class="btn" style="background-color: var(--primary-color); color: var(--primary-light);">+New Book</a>
+              </div>
+            </div>
+            
             <?php  
               if (isset($_GET['success']) && $_GET['success'] == 1) {
                   echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                           <strong>Success!</strong> Book Updated Successfully.
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+              }
+              if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
+                  echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                          <strong>Success!</strong> Book Deleted Successfully.
                           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>';
               }

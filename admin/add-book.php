@@ -16,7 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         "shelf_location" => $_POST['shelf_location'] ?? '',
         "category" => $_POST['category'] ?? '',
         "condition" => $_POST['condition'] ?? '',
-        "status" => $_POST['status'] ?? ''
+        "status" => $_POST['status'] ?? '',
+        "copies" => $_POST['copies'] ?? ''
     ];
 
     $old = $data; // store old values for redisplay
@@ -116,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         id="year_published" name="year_published" min="1900" max="2100" placeholder="YYYY"
                         value="<?= htmlspecialchars($old['year_published'] ?? '') ?>">
                     <?php if (in_array('Year published is required.', $errors)): ?>
-                        <div class="invalid-feedback">Year published is required.</div>
+                        <div class="invalid-feedback">Year Published is required.</div>
                     <?php endif; ?>
                 </div>
 
@@ -126,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="text" class="form-control <?= in_array('Shelf location is required.', $errors) ? 'is-invalid' : '' ?>"
                         id="shelf_location" name="shelf_location" value="<?= htmlspecialchars($old['shelf_location'] ?? '') ?>">
                     <?php if (in_array('Shelf location is required.', $errors)): ?>
-                        <div class="invalid-feedback">Shelf location is required.</div>
+                        <div class="invalid-feedback">Shelf Location is required.</div>
                     <?php endif; ?>
                 </div>
 
@@ -168,6 +169,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </select>
                     <?php if (in_array('Status is required.', $errors)): ?>
                         <div class="invalid-feedback">Status is required.</div>
+                    <?php endif; ?>
+                </div>
+
+                <!-- Copies -->
+                <div class="mb-3">
+                    <label for="copies" class="form-label">Number of Copies</label>
+                    <input type="number" class="form-control <?= in_array('Number of copies is required.', $errors) ? 'is-invalid' : '' ?>"
+                        id="copies" name="copies" placeholder="Copies"
+                        value="<?= htmlspecialchars($old['copies'] ?? '') ?>">
+                    <?php if (in_array('Number of copies is required.', $errors)): ?>
+                        <div class="invalid-feedback">Number of Copies is required.</div>
                     <?php endif; ?>
                 </div>
 

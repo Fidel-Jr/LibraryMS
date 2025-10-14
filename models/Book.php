@@ -11,7 +11,7 @@
             $errors = [];
 
             // Validate required fields
-            $requiredFields = ['title', 'author', 'isbn', 'year_published', 'shelf_location', 'category', 'condition', 'status'];
+            $requiredFields = ['title', 'author', 'isbn', 'year_published', 'shelf_location', 'category', 'condition', 'status', 'number_of_copies'];
             foreach ($requiredFields as $field) {
                 if (empty(trim($data[$field] ?? ''))) {
                     $errors[] = ucfirst(str_replace('_', ' ', $field)) . " is required.";
@@ -50,15 +50,16 @@
                 $bookId = $this->pdo->lastInsertId();
 
                 // Insert into catalog table
-                $sqlCatalog = "INSERT INTO catalog (book_id, shelf_location, category, book_condition, status)
-                            VALUES (:book_id, :shelf_location, :category, :condition, :status)";
+                $sqlCatalog = "INSERT INTO catalog (book_id, shelf_location, category, book_condition, status, copies)
+                            VALUES (:book_id, :shelf_location, :category, :condition, :status, :copies)";
                 $stmtCatalog = $this->pdo->prepare($sqlCatalog);
                 $stmtCatalog->execute([
                     ":book_id" => $bookId,
                     ":shelf_location" => $data['shelf_location'] ?? null,
                     ":category" => $data['category'] ?? null,
                     ":condition" => $data['condition'],
-                    ":status" => $data['status']
+                    ":status" => $data['status'],
+                    ":copies" => $data['copies']
                 ]);
 
                 // Commit if both succeed

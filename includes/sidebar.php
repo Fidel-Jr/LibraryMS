@@ -12,12 +12,14 @@
     <ul class="sidebar-menu">
         <li><a href="../admin/dashboard.php" class="<?php echo ($current_page == 'dashboard.php') ? 'active' : ''; ?>"><i class="fas fa-home"></i> <span>Dashboard</span></a></li>
         <li>
-            <a href="../admin/add-book.php" class="<?php echo ($current_page == 'add-book.php') ? 'active' : ''; ?>"><i class="fas fa-circle-plus"></i> <span>Add Books</span></a>
+            <a href="../admin/add-book.php" class="<?php echo ($current_page == 'add-book.php') ? 'active' : ''; ?>"><i class="fas fa-circle-plus"></i> <span>Add Book</span></a>
         </li>
         <li>
-            <a href="../admin/manage-book.php" class="<?php echo ($current_page == 'manage-book.php') ? 'active' : ''; ?>"><i class="fas fa-book"></i> <span>Manage Books</span></a>
+            <a href="../admin/manage-book.php" class="<?php echo ($current_page == 'manage-book.php') ? 'active' : ''; ?>"><i class="fas fa-book"></i> <span>Manage Book</span></a>
         </li>
-        <li><a href="#"><i class="fas fa-users"></i> <span>Members</span></a></li>
+        <li>
+            <a href="../users/issue-book.php" class="<?php echo ($current_page == 'issue-book.php') ? 'active' : ''; ?>"><i class="fas fa-book"></i> <span>Issue Book</span></a>
+        </li>
         <li><a href="#"><i class="fas fa-shopping-cart"></i> <span>Orders</span></a></li>
         <li><a href="#"><i class="fas fa-box"></i> <span>Products</span></a></li>
         <li><a href="#"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
