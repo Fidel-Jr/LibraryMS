@@ -70,7 +70,7 @@
             try {
                 // ✅ Update due date for the issued book
                 $sql = "UPDATE issued_books 
-                        SET due_date = :new_due_date
+                        SET due_date = :new_due_date, renew_count = COALESCE(renew_count, 0) + 1, updated_at = NOW()
                         WHERE issued_id = :issued_id";
                 $stmt = $this->pdo->prepare($sql);
                 $stmt->execute([

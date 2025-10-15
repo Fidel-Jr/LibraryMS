@@ -52,7 +52,7 @@
     $result = $issued->renewBook($data);
 
     if ($result['success']) {
-        $_SESSION['success'] = "♻️ Book renewed successfully!";
+        $_SESSION['success'] = "✅ Book renewed successfully!";
         header("Location: issue-book.php");
         exit;
     } else {
