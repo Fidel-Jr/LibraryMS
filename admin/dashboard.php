@@ -1,3 +1,12 @@
+<?php
+
+    session_start();
+    if(!isset($_SESSION["user_id"]) && $_SESSION['role'] != 'Admin'){
+        header("Location: ../index.php");
+    }    
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -195,7 +204,7 @@
                                         <td>Mr. Smith</td>
                                         <td>John Doe</td>
                                         <td>2024-10-01</td>
-                                        <td><span class="badge" style="background-color: var(--primary-color);">Completed</span></td>
+                                        <td><span class="badge" style="background-color: var(--primary-color);">Returned</span></td>
                                     </tr>
                                     <tr>
                                         <td>#341143</td>
@@ -203,7 +212,7 @@
                                         <td>Adams Chester</td>
                                         <td>Jane Smith</td>
                                         <td>2024-10-02</td>
-                                        <td><span class="badge" style="background-color: var(--primary-color);">Completed</span></td>    
+                                        <td><span class="badge" style="background-color: var(--primary-color);">Returned</span></td>    
                                     </tr>
                                     <tr>
                                         <td>#341143</td>
@@ -211,7 +220,7 @@
                                         <td>Adams Chester</td>
                                         <td>Jane Smith</td>
                                         <td>2024-10-02</td>
-                                        <td><span class="badge" style="background-color: var(--primary-color);">Completed</span></td>    
+                                        <td><span class="badge" style="background-color: var(--primary-color);">Returned</span></td>    
                                     </tr>
                                     <tr>
                                         <td>#341143</td>
@@ -219,7 +228,7 @@
                                         <td>Adams Chester</td>
                                         <td>Jane Smith</td>
                                         <td>2024-10-02</td>
-                                        <td><span class="badge" style="background-color: var(--primary-color);">Completed</span></td>    
+                                        <td><span class="badge" style="background-color: var(--primary-color);">Returned</span></td>    
                                     </tr>
                                     <tr>
                                         <td>#341143</td>
@@ -227,7 +236,7 @@
                                         <td>Adams Chester</td>
                                         <td>Jane Smith</td>
                                         <td>2024-10-02</td>
-                                        <td><span class="badge" style="background-color: var(--primary-color);">Completed</span></td>    
+                                        <td><span class="badge" style="background-color: var(--primary-color);">Returned</span></td>    
                                     </tr>
                                     <tr>
                                         <td>#341143</td>
@@ -235,7 +244,7 @@
                                         <td>Adams Chester</td>
                                         <td>Jane Smith</td>
                                         <td>2024-10-02</td>
-                                        <td><span class="badge" style="background-color: var(--primary-color);">Completed</span></td>    
+                                        <td><span class="badge" style="background-color: var(--primary-color);">Returned</span></td>    
                                     </tr>
                                 </tbody>
 
@@ -302,61 +311,7 @@
 
     <!-- Chart.JS Script -->
     <script>
-        const ctx = document.getElementById('checkoutChart').getContext('2d');
-
-        const checkoutChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                datasets: [ 
-                    {
-                        label: 'Borrowed',
-                        data: [2800, 4500, 3200, 3400, 2000, 3300, 3100],
-                        borderColor: '#1a73e8', // You can change the background color here
-                        backgroundColor: 'rgba(24, 74, 192, 0.1)', // You can change the fill color here
-                        tension: 0.4,
-                        fill: true,
-                    },
-                    {
-                        label: 'Returned',
-                        data: [1500, 2600, 4300, 4100, 3700, 2900, 2400],
-                        borderColor: '#ef4444', // You can change the background color here
-                        backgroundColor: 'rgba(239, 68, 68, 0.1)', // You can change the fill color here
-                        tension: 0.4,
-                        fill: true,
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                aspectRatio: 2, // Optional: controls width/height ratio
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: value => value + 'K',
-                        },
-                        grid: { color: '#f1f1f1' }
-                    },
-                    x: {
-                        grid: { display: false }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        position: 'top',
-                        labels: { usePointStyle: true, boxWidth: 8 }
-                    },
-                    tooltip: { mode: 'index', intersect: false }
-                },
-                interaction: {
-                    mode: 'nearest',
-                    axis: 'x',
-                    intersect: false
-                }
-            }
-        });
+        
     </script>
     
 </body>

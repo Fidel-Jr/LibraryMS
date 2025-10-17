@@ -1,3 +1,34 @@
+<?php
+require_once '../config/database.php';
+require_once '../models/User.php';
+session_start();
+
+$user = new User($pdo);
+
+$errors = [];
+$success = "";
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = [
+        'full_name' => $_POST['fullname'] ?? '',
+        'email' => $_POST['email'] ?? '',
+        'username' => $_POST['username'] ?? '',
+        'password' => $_POST['password'] ?? '',
+        'confirm_password' => $_POST['confirm_password'] ?? '',
+        'role' => 'User', // Default role
+        'phone' => null   // Optional for now
+    ];
+
+    $result = $user->register($data);
+
+    if ($result['success']) {
+        $success = $result['message'];
+    } else {
+        $errors = $result['errors'];
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,32 +114,69 @@
     <div class="web-title-bar">
         <span class="web-title-text">LibraryMS</span>
     </div>
+
     <div class="min-vh-100 d-flex justify-content-center align-items-center">
         <div class="card p-4 register-card">
             <div class="register-title">Create Your Account</div>
+
+            <!-- ✅ Show Errors -->
+            <?php if (!empty($errors)): ?>
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        <?php foreach ($errors as $error): ?>
+                            <li><?= htmlspecialchars($error) ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
+            <!-- ✅ Show Success -->
+            <?php if (!empty($success)): ?>
+                <div class="alert alert-success">
+                    <?= htmlspecialchars($success) ?> 
+                    <a href="../index.php" class="text-decoration-none">Login here</a>.
+                </div>
+            <?php endif; ?>
+
             <form action="" method="post" autocomplete="off">
                 <div class="mb-3">
                     <label for="fullname" class="form-label">Full Name</label>
-                    <input type="text" id="fullname" name="fullname" class="form-control" placeholder="Enter your full name" required>
+                    <input type="text" id="fullname" name="fullname" 
+                        class="form-control <?= in_array('Full name is required.', $errors ?? []) ? 'is-invalid' : '' ?>"
+                        placeholder="Enter your full name" value="<?= htmlspecialchars($_POST['fullname'] ?? '') ?>">
                 </div>
+
                 <div class="mb-3">
                     <label for="email" class="form-label">Email Address</label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+                    <input type="email" id="email" name="email" 
+                        class="form-control <?= in_array('Email is required.', $errors ?? []) ? 'is-invalid' : '' ?>"
+                        placeholder="Enter your email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
                 </div>
+
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" id="username" name="username" class="form-control" placeholder="Choose a username" required>
+                    <input type="text" id="username" name="username" 
+                        class="form-control <?= in_array('Username is required.', $errors ?? []) ? 'is-invalid' : '' ?>"
+                        placeholder="Choose a username" value="<?= htmlspecialchars($_POST['username'] ?? '') ?>">
                 </div>
+
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" id="password" name="password" class="form-control" placeholder="Create a password" required>
+                    <input type="password" id="password" name="password" 
+                        class="form-control <?= in_array('Password is required.', $errors ?? []) ? 'is-invalid' : '' ?>"
+                        placeholder="Create a password">
                 </div>
+
                 <div class="mb-3">
                     <label for="confirm_password" class="form-label">Confirm Password</label>
-                    <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Re-enter your password" required>
+                    <input type="password" id="confirm_password" name="confirm_password" 
+                        class="form-control <?= in_array('Confirm password is required.', $errors ?? []) ? 'is-invalid' : '' ?>"
+                        placeholder="Re-enter your password">
                 </div>
+
                 <button type="submit" class="btn btn-primary w-100 mt-2">Register</button>
             </form>
+
             <div class="register-footer">
                 Already have an account? <a href="../index.php">Login</a>
             </div>

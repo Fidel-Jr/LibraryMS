@@ -58,6 +58,7 @@ td, th{
 
 .sidebar-header {
     padding: 20px;
+    
     background-color: white;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
@@ -75,9 +76,12 @@ td, th{
     border-bottom: 1px solid var(--primary-dark);
 }
 
+
+
 #sidebar.collapsed .sidebar-header h3 {
     opacity: 0;
     width: 0;
+    height: 0;
 }
 
 .sidebar-menu {

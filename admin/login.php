@@ -1,6 +1,6 @@
 <?php
-require_once 'config/database.php';
-require_once 'models/User.php';
+require_once '../config/database.php';
+require_once '../models/User.php';
 session_start();
 
 $user = new User($pdo);
@@ -10,10 +10,10 @@ $success = "";
 
 // ✅ Handle login form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["login_btn"])) {
-    $result = $user->login($_POST);
+    $result = $user->adminLogin($_POST);
 
     if ($result['success']) {
-        header("Location: ./users/dashboard.php");
+        header("Location: dashboard.php");
         exit;
     } else {
         $errors = $result['errors'] ?? [];
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["login_btn"])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
     <style>
         body {
             background: linear-gradient(135deg, var(--primary-color) 0%, #f5f5f5 100%);
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["login_btn"])) {
         .login-title {
             font-weight: 600;
             color: var(--primary-dark);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.0rem;
             text-align: center;
         }
         .form-label {
@@ -104,7 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["login_btn"])) {
 
     <div class="min-vh-100 d-flex justify-content-center align-items-center">
         <div class="card p-4 login-card">
-            <div class="login-title">Library Login</div>
+            <div class="login-title">Library</div>
+            <div class="login-title">Login as Admin</div>
 
             <!-- ✅ Show Errors -->
             <?php if (!empty($errors)): ?>
@@ -117,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["login_btn"])) {
                 </div>
             <?php endif; ?>
 
-            <form action="index.php" method="post" autocomplete="off">
+            <form action="login.php" method="post" autocomplete="off">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input 
@@ -138,13 +139,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["login_btn"])) {
                         class="form-control <?= in_array('Password is required.', $errors ?? []) ? 'is-invalid' : '' ?>"
                         placeholder="Enter your password">
                 </div>
-                <a href="./admin/login.php">Log in as admin</a>
+
                 <button type="submit" name="login_btn" class="btn btn-primary w-100 mt-3">Login</button>
             </form>
 
-            <div class="login-footer">
+            <!-- <div class="login-footer">
                 Don't have an account? <a href="users/register.php">Become A Member</a>
-            </div>
+            </div> -->
         </div>
     </div>
 </body>

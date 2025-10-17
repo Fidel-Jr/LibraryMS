@@ -61,7 +61,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php include '../includes/navbar.php'; ?>
 
         <div class="container-fluid mt-4 bg-white p-4 rounded shadow-sm">
-            <h2 class="mb-3">Add New Book</h2>
+            <div class="d-flex justify-content-between">
+              <div>
+                <h2 class="mb-3">Add New Book</h2>
+              </div>
+              <div>
+                <a href="manage-book.php" class="btn" style="background-color: var(--primary-color); color: var(--primary-light);">Manage Book</a>
+              </div>
+            </div>
 
             <?php
             if (isset($newBookAdded)) {

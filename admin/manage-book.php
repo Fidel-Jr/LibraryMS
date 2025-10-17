@@ -92,7 +92,7 @@
                         </div>';
               }
             ?>
-            <table id="example" class="table table-striped">
+            <table id="manage-book-table-example" class="table table-striped">
         <thead>
             <tr>
                 <th>Title</th>
@@ -350,68 +350,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.3.4/js/dataTables.bootstrap5.js"></script>
-    <script>
-        new DataTable('#example');
-
-        document.querySelectorAll(".view-book").forEach(button => {
-            button.addEventListener("click", function() {
-                const bookId = this.dataset.id;
-                const title = this.dataset.title;
-                const author = this.dataset.author;
-                const isbn = this.dataset.isbn;
-                const year = this.dataset.year;
-
-                // Fill modal with book details
-                document.getElementById("bookTitle").textContent = title;
-                document.getElementById("bookAuthor").textContent = author;
-                document.getElementById("bookISBN").textContent = isbn;
-                document.getElementById("bookYear").textContent = year;
-
-                // Show modal
-                const deleteModal = new bootstrap.Modal(document.getElementById("deleteBookModal"));
-                deleteModal.show();
-
-                // Confirm delete
-                document.getElementById("confirmDelete").onclick = function() {
-                if (confirm(`Are you sure you want to delete "${title}"?`)) {
-                    window.location.href = `manage-book.php?deleted_id=${bookId}`;
-                }
-                };
-            }); 
-        });
-        document.querySelectorAll(".edit-book").forEach(button => {
-            button.addEventListener("click", function () {
-                const bookId = this.dataset.id;
-                const title = this.dataset.title;
-                const author = this.dataset.author;
-                const isbn = this.dataset.isbn;
-                const year = this.dataset.year;
-
-                // Fill book info fields
-                document.getElementById("editBookId").value = bookId;
-                document.getElementById("editTitle").value = title;
-                document.getElementById("editAuthor").value = author;
-                document.getElementById("editISBN").value = isbn;
-                document.getElementById("editYear").value = year;
-
-                // If catalog data exists, fill here (optional)
-                document.getElementById("editCatalogId").value = this.dataset.catalogId;
-                document.getElementById("editStatus").value = this.dataset.status || 'Available';
-                document.getElementById("editLocation").value = this.dataset.shelf_location || '';
-                document.getElementById("editCategory").value = this.dataset.category || '';
-                document.getElementById("editCondition").value = this.dataset.condition || 'Good';
-
-                // Set form action dynamically
-                document.getElementById("editBookForm").action = `manage-book.php?book_id=${bookId}`;
-
-                // Show modal
-                const editModal = new bootstrap.Modal(document.getElementById("editBookModal"));
-                editModal.show();
-            });
-            });
-
-
-    </script>
+    <script src="../assets/js/books.js"></script>
     
 </body>
 </html>
